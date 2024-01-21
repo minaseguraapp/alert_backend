@@ -19,7 +19,7 @@ public class SetAlertsConfigurationFunction implements
     public APIGatewayProxyResponseEvent apply(
         APIGatewayProxyRequestEvent apiGatewayProxyRequestEvent) {
 
-        LOGGER.info("New Request Started");
+        LOGGER.info("New Request Started with body:"+apiGatewayProxyRequestEvent.getBody());
         return new APIGatewayProxyResponseEvent()
             .withStatusCode(HttpStatusCode.OK).withBody("Hello world");
     }
