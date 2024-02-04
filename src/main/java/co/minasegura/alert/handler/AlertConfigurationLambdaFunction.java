@@ -12,11 +12,11 @@ import java.util.Map;
 import java.util.function.Function;
 
 @Component
-public class AlertLambdaFunction implements
+public class AlertConfigurationLambdaFunction implements
         Function<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> {
     private final Map<Route, LambdaFunction> router;
 
-    public AlertLambdaFunction(Map<Route, LambdaFunction> router) {
+    public AlertConfigurationLambdaFunction(Map<Route, LambdaFunction> router) {
         this.router = router;
     }
 

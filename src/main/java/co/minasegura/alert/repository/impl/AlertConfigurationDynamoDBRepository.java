@@ -6,13 +6,14 @@ import co.minasegura.alert.repository.IAlertConfigurationRepository;
 import jakarta.annotation.Nonnull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Repository;
 import software.amazon.awssdk.enhanced.dynamodb.*;
 import software.amazon.awssdk.enhanced.dynamodb.model.QueryConditional;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-
+@Repository
 public class AlertConfigurationDynamoDBRepository implements IAlertConfigurationRepository {
     private static final Logger LOGGER = LoggerFactory.getLogger(Logger.class);
     private final DynamoDbEnhancedClient enhancedClient;
