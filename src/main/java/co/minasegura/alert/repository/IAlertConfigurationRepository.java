@@ -1,14 +1,13 @@
 package co.minasegura.alert.repository;
 
-import co.minasegura.measurement.entity.MeasurementEntity;
+import co.minasegura.alert.entity.AlertConfigurationEntity;
 import jakarta.annotation.Nonnull;
 
 import java.util.List;
 
 public interface IAlertConfigurationRepository {
 
-    List<AlertConfigurationEntity> setAlertConfigurationEntity(@Nonnull String mineId, @Nonnull String ZoneId,
-        String measurementType);
+    List<AlertConfigurationEntity> getAlertConfigurationEntities(@Nonnull String mineId, String measurementType);
 
-    boolean createMeasurement(AlertConfigurationEntity alertConfiguration);
+    boolean configureAlert(AlertConfigurationEntity alertConfiguration);
 }

@@ -2,10 +2,7 @@ package co.minasegura.alert.util;
 
 import co.minasegura.alert.dto.AlertConfigurationFilter;
 import co.minasegura.alert.model.AlertConfiguration;
-import co.minasegura.alert.properties.AlertProperties;
-import co.minasegura.measurement.dto.MeasurementFilter;
-import co.minasegura.measurement.model.Measurement;
-import co.minasegura.measurement.properties.MeasurementProperties;
+import co.minasegura.alert.properties.AlertConfigurationProperties;
 import jakarta.validation.Validator;
 import org.springframework.stereotype.Service;
 
@@ -17,10 +14,10 @@ import java.util.stream.Stream;
 @Service
 public class EntrypointUtil {
 
-    private final AlertProperties properties;
+    private final AlertConfigurationProperties properties;
     private final Validator validator;
 
-    public EntrypointUtil(AlertProperties properties, Validator validator) {
+    public EntrypointUtil(AlertConfigurationProperties properties, Validator validator) {
         this.properties = properties;
         this.validator= validator;
     }

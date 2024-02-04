@@ -8,6 +8,14 @@ import java.util.Set;
 
 @Configuration
 @ConfigurationProperties(prefix = "alert")
-public class AlertProperties {
+public class AlertConfigurationProperties {
     private Set<AlertConfigurationFilter> requiredFilters;
+
+    public Set<AlertConfigurationFilter> getRequiredFilters() {
+        return requiredFilters;
+    }
+
+    public void setRequiredFilters(Set<AlertConfigurationFilter> requiredFilters) {
+        this.requiredFilters = requiredFilters;
+    }
 }

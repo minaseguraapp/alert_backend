@@ -16,6 +16,10 @@ public class AlertLambdaFunction implements
         Function<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> {
     private final Map<Route, LambdaFunction> router;
 
+    public AlertLambdaFunction(Map<Route, LambdaFunction> router) {
+        this.router = router;
+    }
+
     @Override
     public APIGatewayProxyResponseEvent apply(
             APIGatewayProxyRequestEvent apiGatewayProxyRequestEvent) {
