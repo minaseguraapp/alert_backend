@@ -1,6 +1,6 @@
 package co.minasegura.alert.util;
 
-import co.minasegura.alert.dto.AlertFilter;
+import co.minasegura.alert.dto.AlertConfigurationFilter;
 import co.minasegura.alert.model.AlertConfiguration;
 import co.minasegura.alert.properties.AlertProperties;
 import co.minasegura.measurement.dto.MeasurementFilter;
@@ -25,14 +25,14 @@ public class EntrypointUtil {
         this.validator= validator;
     }
 
-    public EnumMap<AlertFilter, String> getAlertFilter(
+    public EnumMap<AlertConfigurationFilter, String> getAlertFilter(
         Map<String, String> queryParams) {
 
-        final Map<String, AlertFilter> invertedFilterMap = Stream.of(
-                        AlertFilter.values())
-            .collect(Collectors.toMap(AlertFilter::getFilter, filter -> filter));
+        final Map<String, AlertConfigurationFilter> invertedFilterMap = Stream.of(
+                        AlertConfigurationFilter.values())
+            .collect(Collectors.toMap(AlertConfigurationFilter::getFilter, filter -> filter));
 
-        final EnumMap<AlertFilter, String> filters = new EnumMap<>(AlertFilter.class);
+        final EnumMap<AlertConfigurationFilter, String> filters = new EnumMap<>(AlertConfigurationFilter.class);
 
         queryParams.entrySet().stream()
             .filter(entry -> invertedFilterMap.containsKey(entry.getKey()))
@@ -41,7 +41,7 @@ public class EntrypointUtil {
         return filters;
     }
 
-    public boolean hasRequestMinimumCriteria(EnumMap<AlertFilter, String> searchCriteria) {
+    public boolean hasRequestMinimumCriteria(EnumMap<AlertConfigurationFilter, String> searchCriteria) {
         return properties.getRequiredFilters().stream().allMatch(searchCriteria::containsKey);
     }
 
