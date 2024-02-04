@@ -37,6 +37,7 @@ public class Config {
     public Map<Route, LambdaFunction> getRouter(PostConfigureAlertLambda postConfigureAlertLambda) {
         Map<Route, LambdaFunction> routerConfig = new HashMap<>();
         routerConfig.put(new Route(HttpMethod.POST, "/alert/configure"), postConfigureAlertLambda);
+        routerConfig.put(new Route(HttpMethod.POST, "/alert/list"), postConfigureAlertLambda);
         return routerConfig;
     }
 

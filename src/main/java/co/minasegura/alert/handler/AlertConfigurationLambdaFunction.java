@@ -40,10 +40,7 @@ public class AlertConfigurationLambdaFunction implements
 
         String httpMethod = apiGatewayProxyRequestEvent.getHttpMethod();
         String path = apiGatewayProxyRequestEvent.getPath();
-
         HttpMethod method = HttpMethod.valueOf(httpMethod);
-
         return new Route(method, path);
-
     }
 }

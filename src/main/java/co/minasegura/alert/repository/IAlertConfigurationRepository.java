@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface IAlertConfigurationRepository {
 
-    List<AlertConfigurationEntity> getAlertConfigurationEntities(@Nonnull String mineId, String measurementType);
+    List<AlertConfigurationEntity> getAlertConfigurationEntities(String mineId, String measurementType);
 
     boolean configureAlert(AlertConfigurationEntity alertConfiguration);
 }

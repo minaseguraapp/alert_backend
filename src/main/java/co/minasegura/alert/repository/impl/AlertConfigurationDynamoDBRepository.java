@@ -13,6 +13,7 @@ import software.amazon.awssdk.enhanced.dynamodb.model.QueryConditional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+
 @Repository
 public class AlertConfigurationDynamoDBRepository implements IAlertConfigurationRepository {
     private static final Logger LOGGER = LoggerFactory.getLogger(Logger.class);
@@ -23,7 +24,7 @@ public class AlertConfigurationDynamoDBRepository implements IAlertConfiguration
     }
 
     @Override
-    public List<AlertConfigurationEntity> getAlertConfigurationEntities(@Nonnull String mineId, String measurementType) {
+    public List<AlertConfigurationEntity> getAlertConfigurationEntities(String mineId, String measurementType) {
         LOGGER.info(
                 "Get Alert Configuration Repository Started with: MineID[{}] MeasurementType[{}]",
                 mineId, measurementType);
