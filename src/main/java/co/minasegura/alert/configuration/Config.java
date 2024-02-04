@@ -36,8 +36,8 @@ public class Config {
     @Bean
     public Map<Route, LambdaFunction> getRouter(PostConfigureAlertLambda postConfigureAlertLambda) {
         Map<Route, LambdaFunction> routerConfig = new HashMap<>();
-        routerConfig.put(new Route(HttpMethod.POST, "/alert/configure"), postConfigureAlertLambda);
-        routerConfig.put(new Route(HttpMethod.POST, "/alert/list"), postConfigureAlertLambda);
+        routerConfig.put(new Route(HttpMethod.POST, "/configuration"), postConfigureAlertLambda);
+        routerConfig.put(new Route(HttpMethod.GET, "/configuration"), postConfigureAlertLambda);
         return routerConfig;
     }
 

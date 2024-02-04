@@ -21,21 +21,79 @@ Resources:
       Name: Alert API
       Description: API to expose alert services
 
-  SetAlertsConfigurationFunction:
+  LambdaExecutionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: sts:AssumeRole
+      Policies:
+        - PolicyName: DynamoDBAccess
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - dynamodb:GetItem
+                  - dynamodb:Query
+                  - dynamodb:Scan
+                  - dynamodb:PutItem
+                  - dynamodb:UpdateItem
+                  - dynamodb:DeleteItem
+                Resource:
+                  - !GetAtt AlertConfigurationTable.Arn
+        - PolicyName: CloudWatchLogsAccess # Añade esta nueva política
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - logs:CreateLogGroup
+                  - logs:CreateLogStream
+                  - logs:PutLogEvents
+                Resource: arn:aws:logs:*:*:*
+
+  AlertsConfigurationFunction:
     Type: AWS::Serverless::Function
     Properties:
       Environment:
         Variables:
-          SPRING_CLOUD_FUNCTION_DEFINITION: SetAlertsConfigurationFunction
+          SPRING_CLOUD_FUNCTION_DEFINITION: AlertConfigurationLambdaFunction
       Events:
         PostRequest:
           Type: Api
           Properties:
             RestApiId: !Ref AlertApi
-            Path: /configuration/set
+            Path: /configuration
             Method: post
+        GetRequest:
+          Type: Api
+          Properties:
+            RestApiId: !Ref AlertApi
+            Path: /configuration
+            Method: get
+
+  AlertConfigurationTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: AlertConfigurationTable
+      AttributeDefinitions:
+        - AttributeName: mineId
+          AttributeType: S
+        - AttributeName: measurementType
+          AttributeType: S
+      KeySchema:
+        - AttributeName: mineId
+          KeyType: HASH
+        - AttributeName: measurementType
+          KeyType: RANGE
+      BillingMode: PAY_PER_REQUEST
 
 Outputs:
   ApiEndpoint:
-    Description: "API Gateway endpoint URL for Prod stage for Springboot sample function"
-    Value: !Sub "https://${AlertApi}.execute-api.${AWS::Region}.amazonaws.com/development/configuration/set"
+    Description: "API Gateway endpoint URL for Alert Services"
+    Value: !Sub "https://${AlertApi}.execute-api.${AWS::Region}.amazonaws.com/development/configuration"
