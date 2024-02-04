@@ -42,7 +42,7 @@ public class PostConfigureAlertLambda implements LambdaFunction {
         }
 
         boolean successRegister = alertConfigurationService.configureAlert(alertToRegister);
-        LOGGER.info("POST Measurement API Finished");
+        LOGGER.info("POST Configure Alert API Finished");
 
         return new APIGatewayProxyResponseEvent().withStatusCode(
                 successRegister ? HttpStatusCode.CREATED : HttpStatusCode.INTERNAL_SERVER_ERROR);

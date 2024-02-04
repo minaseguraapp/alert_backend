@@ -5,14 +5,8 @@ import co.minasegura.alert.mapper.IAlertConfigurationMapper;
 import co.minasegura.alert.model.AlertConfiguration;
 import co.minasegura.alert.model.MeasurementType;
 import co.minasegura.alert.model.Mine;
-import co.minasegura.alert.util.DynamoDBUtil;
 
 public class AlertConfigurationMapper implements IAlertConfigurationMapper {
-    private final DynamoDBUtil dbUtil;
-
-    public AlertConfigurationMapper(DynamoDBUtil dbUtil) {
-        this.dbUtil = dbUtil;
-    }
 
     @Override
     public AlertConfiguration entityToModel(AlertConfigurationEntity entity) {

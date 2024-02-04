@@ -20,16 +20,13 @@ public class AlertConfigurationService implements IAlertConfigurationService {
 
     private final IAlertConfigurationRepository repository;
     private final ServiceUtil serviceUtil;
-    private final AlertConfigurationMapper mapper;
     private final CommonsUtil commonsUtil;
 
     public AlertConfigurationService(IAlertConfigurationRepository repository,
                                      ServiceUtil serviceUtil,
-                                     AlertConfigurationMapper mapper,
                                      CommonsUtil commonsUtil) {
         this.repository = repository;
         this.serviceUtil = serviceUtil;
-        this.mapper = mapper;
         this.commonsUtil = commonsUtil;
     }
 
