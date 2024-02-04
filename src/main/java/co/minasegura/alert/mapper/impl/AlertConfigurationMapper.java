@@ -4,16 +4,16 @@ import co.minasegura.alert.entity.AlertConfigurationEntity;
 import co.minasegura.alert.mapper.IAlertConfigurationMapper;
 import co.minasegura.alert.model.AlertConfiguration;
 import co.minasegura.alert.model.MeasurementType;
-import co.minasegura.alert.model.Mine;
+import org.springframework.stereotype.Component;
 
+@Component
 public class AlertConfigurationMapper implements IAlertConfigurationMapper {
 
     @Override
     public AlertConfiguration entityToModel(AlertConfigurationEntity entity) {
-        Mine mine = new Mine(entity.getMineId());
         MeasurementType measurementType = MeasurementType.valueOf(entity.getMeasurementType());
 
-        return new AlertConfiguration(entity.getTimestamp(), mine, measurementType, entity.getAlertConfigurationInfo());
+        return new AlertConfiguration(entity.getTimestamp(), entity.getMineId(), measurementType, entity.getAlertConfigurationInfo());
     }
 
     @Override

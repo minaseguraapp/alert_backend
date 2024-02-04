@@ -7,7 +7,7 @@ import java.util.Map;
 
 public record AlertConfiguration(
         @NotNull Long timestamp,
-        @NotNull Mine mine,
+        @NotNull String mineId,
         @NotNull @Valid MeasurementType measurementType,
         @NotNull Map<String, String> thresholdInfo) {
 }

@@ -57,7 +57,7 @@ Resources:
                   - logs:PutLogEvents
                 Resource: arn:aws:logs:*:*:*
 
-  AlertsConfigurationFunction:
+  AlertConfigurationFunction:
     Type: AWS::Serverless::Function
     Properties:
       Environment:

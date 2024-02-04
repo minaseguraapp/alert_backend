@@ -1,6 +1,5 @@
 package co.minasegura.alert.entity;
 
-import co.minasegura.alert.model.Mine;
 import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbAttribute;
 import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbBean;
 import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbPartitionKey;
@@ -14,7 +13,6 @@ public class AlertConfigurationEntity {
     private Long timestamp;
     private Map<String, String> alertConfigurationInfo;
     private String measurementType;
-    private Mine mine;
 
     public AlertConfigurationEntity() {
     }
@@ -24,7 +22,6 @@ public class AlertConfigurationEntity {
         this.timestamp = timestamp;
         this.alertConfigurationInfo = alertConfigurationInfo;
         this.measurementType = measurementType;
-        this.mine = mine;
     }
 
     @DynamoDbPartitionKey
@@ -63,14 +60,5 @@ public class AlertConfigurationEntity {
     @DynamoDbAttribute("measurementType")
     public void setMeasurementType(String measurementType) {
         this.measurementType = measurementType;
-    }
-
-    @DynamoDbAttribute("mine")
-    public Mine getMine() {
-        return mine;
-    }
-
-    public void setMine(Mine mine) {
-        this.mine = mine;
     }
 }
