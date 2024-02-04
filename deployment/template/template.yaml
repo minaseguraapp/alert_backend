@@ -46,7 +46,7 @@ Resources:
                   - dynamodb:DeleteItem
                 Resource:
                   - !GetAtt AlertConfigurationTable.Arn
-        - PolicyName: CloudWatchLogsAccess # Añade esta nueva política
+        - PolicyName: CloudWatchLogsAccess
           PolicyDocument:
             Version: '2012-10-17'
             Statement:
@@ -60,6 +60,7 @@ Resources:
   AlertConfigurationFunction:
     Type: AWS::Serverless::Function
     Properties:
+      Role: !GetAtt LambdaExecutionRole.Arn
       Environment:
         Variables:
           SPRING_CLOUD_FUNCTION_DEFINITION: AlertConfigurationLambdaFunction
@@ -68,13 +69,34 @@ Resources:
           Type: Api
           Properties:
             RestApiId: !Ref AlertApi
-            Path: /configuration
+            Path: /alert/configuration
             Method: post
         GetRequest:
           Type: Api
           Properties:
             RestApiId: !Ref AlertApi
-            Path: /configuration
+            Path: /alert/configuration
+            Method: get
+
+  AlertFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Role: !GetAtt LambdaExecutionRole.Arn
+      Environment:
+        Variables:
+          SPRING_CLOUD_FUNCTION_DEFINITION: AlertConfigurationLambdaFunction
+      Events:
+        PostRequest:
+          Type: Api
+          Properties:
+            RestApiId: !Ref AlertApi
+            Path: /alert
+            Method: post
+        GetRequest:
+          Type: Api
+          Properties:
+            RestApiId: !Ref AlertApi
+            Path: /alert
             Method: get
 
   AlertConfigurationTable:
@@ -91,6 +113,33 @@ Resources:
           KeyType: HASH
         - AttributeName: measurementType
           KeyType: RANGE
+      BillingMode: PAY_PER_REQUEST
+
+  AlertTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: AlertTable
+      AttributeDefinitions:
+        - AttributeName: mineZoneId
+          AttributeType: S
+        - AttributeName: measurementTypeTimestamp
+          AttributeType: S
+        - AttributeName: mineId
+          AttributeType: S
+      KeySchema:
+        - AttributeName: mineZoneId
+          KeyType: HASH
+        - AttributeName: measurementTypeTimestamp
+          KeyType: RANGE
+      GlobalSecondaryIndexes:
+        - IndexName: MineTypeIndex
+          KeySchema:
+            - AttributeName: mineId
+              KeyType: HASH
+            - AttributeName: measurementTypeTimestamp
+              KeyType: RANGE
+          Projection:
+            ProjectionType: ALL
       BillingMode: PAY_PER_REQUEST
 
 Outputs:

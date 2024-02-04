@@ -1,19 +1,20 @@
 package co.minasegura.alert.configuration;
 
 
+import co.minasegura.alert.handler.entrypoint.GetAlertConfigurationLambda;
+import co.minasegura.alert.handler.entrypoint.GetAlertLambda;
+import co.minasegura.alert.handler.entrypoint.PostAlertLambda;
 import co.minasegura.alert.handler.entrypoint.PostConfigureAlertLambda;
 import co.minasegura.alert.handler.route.LambdaFunction;
 import co.minasegura.alert.handler.route.Route;
 import com.amazonaws.HttpMethod;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import software.amazon.awssdk.services.dynamodb.DynamoDbClient;
-
-import software.amazon.awssdk.enhanced.dynamodb.DynamoDbEnhancedClient;
-import software.amazon.awssdk.services.dynamodb.DynamoDbClient;
 import java.util.HashMap;
 import java.util.Map;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import software.amazon.awssdk.enhanced.dynamodb.DynamoDbEnhancedClient;
+import software.amazon.awssdk.services.dynamodb.DynamoDbClient;
 
 @Configuration
 public class Config {
@@ -26,18 +27,26 @@ public class Config {
     @Bean
     public DynamoDbEnhancedClient dynamoDbEnhancedClient() {
         DynamoDbClient dynamoDbClient = DynamoDbClient.builder()
-                .build();
+            .build();
 
         return DynamoDbEnhancedClient.builder()
-                .dynamoDbClient(dynamoDbClient)
-                .build();
+            .dynamoDbClient(dynamoDbClient)
+            .build();
     }
 
     @Bean
-    public Map<Route, LambdaFunction> getRouter(PostConfigureAlertLambda postConfigureAlertLambda) {
+    public Map<Route, LambdaFunction> getRouter(
+        GetAlertLambda getAlertLambda,
+        PostAlertLambda postAlertLambda,
+        GetAlertConfigurationLambda getAlertConfigurationLambda,
+        PostConfigureAlertLambda postConfigureAlertLambda
+    ) {
         Map<Route, LambdaFunction> routerConfig = new HashMap<>();
-        routerConfig.put(new Route(HttpMethod.POST, "/configuration"), postConfigureAlertLambda);
-        routerConfig.put(new Route(HttpMethod.GET, "/configuration"), postConfigureAlertLambda);
+        routerConfig.put(new Route(HttpMethod.POST, "/alert/configuration"), postConfigureAlertLambda);
+        routerConfig.put(new Route(HttpMethod.GET, "/alert/configuration"), getAlertConfigurationLambda);
+        routerConfig.put(new Route(HttpMethod.POST, "/alert"), postAlertLambda);
+        routerConfig.put(new Route(HttpMethod.GET, "/alert"), getAlertLambda);
+
         return routerConfig;
     }
 
