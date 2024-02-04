@@ -18,6 +18,12 @@ public class AlertConfigurationMapper implements IAlertConfigurationMapper {
 
     @Override
     public AlertConfigurationEntity modelToEntity(AlertConfiguration model) {
-        return null;
+
+        return new AlertConfigurationEntity(
+                model.mineId(),
+                model.timestamp(),
+                model.thresholdInfo(),
+                model.measurementType().name()
+        );
     }
 }

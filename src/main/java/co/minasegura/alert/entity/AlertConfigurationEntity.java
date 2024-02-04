@@ -17,7 +17,7 @@ public class AlertConfigurationEntity {
     public AlertConfigurationEntity() {
     }
 
-    public AlertConfigurationEntity(String mineId, Long timestamp, Map<String, String> alertConfigurationInfo, String measurementType, Mine mine) {
+    public AlertConfigurationEntity(String mineId, Long timestamp, Map<String, String> alertConfigurationInfo, String measurementType) {
         this.mineId = mineId;
         this.timestamp = timestamp;
         this.alertConfigurationInfo = alertConfigurationInfo;
