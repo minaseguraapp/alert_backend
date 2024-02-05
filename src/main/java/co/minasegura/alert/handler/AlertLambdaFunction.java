@@ -12,7 +12,8 @@ import software.amazon.awssdk.http.HttpStatusCode;
 
 @Component
 public class AlertLambdaFunction implements
-        Function<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> {
+    Function<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> {
+
     private final Map<Route, LambdaFunction> router;
 
     public AlertLambdaFunction(Map<Route, LambdaFunction> router) {
@@ -21,21 +22,21 @@ public class AlertLambdaFunction implements
 
     @Override
     public APIGatewayProxyResponseEvent apply(
-            APIGatewayProxyRequestEvent apiGatewayProxyRequestEvent) {
+        APIGatewayProxyRequestEvent apiGatewayProxyRequestEvent) {
 
         Route route = buildRouter(apiGatewayProxyRequestEvent);
         LambdaFunction lambdaToExecute = this.router.get(route);
 
         if (lambdaToExecute == null) {
             return new APIGatewayProxyResponseEvent().withStatusCode(
-                    HttpStatusCode.INTERNAL_SERVER_ERROR);
+                HttpStatusCode.INTERNAL_SERVER_ERROR);
         }
 
         return lambdaToExecute.handle(apiGatewayProxyRequestEvent);
     }
 
     private Route buildRouter(
-            APIGatewayProxyRequestEvent apiGatewayProxyRequestEvent) {
+        APIGatewayProxyRequestEvent apiGatewayProxyRequestEvent) {
 
         String httpMethod = apiGatewayProxyRequestEvent.getHttpMethod();
         String path = apiGatewayProxyRequestEvent.getPath();
