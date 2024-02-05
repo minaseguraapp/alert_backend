@@ -84,7 +84,7 @@ Resources:
       Role: !GetAtt LambdaExecutionRole.Arn
       Environment:
         Variables:
-          SPRING_CLOUD_FUNCTION_DEFINITION: AlertConfigurationLambdaFunction
+          SPRING_CLOUD_FUNCTION_DEFINITION: AlertLambdaFunction
       Events:
         PostRequest:
           Type: Api
