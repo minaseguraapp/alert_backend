@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import java.util.Set;
 
 @Configuration
-@ConfigurationProperties(prefix = "alert")
+@ConfigurationProperties(prefix = "alert.configuration")
 public class AlertConfigurationProperties {
     private Set<AlertConfigurationFilter> requiredFilters;
 
