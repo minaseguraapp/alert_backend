@@ -11,6 +11,7 @@ import com.amazonaws.HttpMethod;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.HashMap;
 import java.util.Map;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import software.amazon.awssdk.enhanced.dynamodb.DynamoDbEnhancedClient;
@@ -35,20 +36,29 @@ public class Config {
     }
 
     @Bean
-    public Map<Route, LambdaFunction> getRouter(
+    @Qualifier("alertRouter")
+    public Map<Route, LambdaFunction> getAlertRouter(
         GetAlertLambda getAlertLambda,
-        PostAlertLambda postAlertLambda,
+        PostAlertLambda postAlertLambda
+        ) {
+        Map<Route, LambdaFunction> routerConfig = new HashMap<>();
+        routerConfig.put(new Route(HttpMethod.POST, "/alert"), postAlertLambda);
+        routerConfig.put(new Route(HttpMethod.GET, "/alert"), getAlertLambda);
+        return routerConfig;
+    }
+
+    @Bean
+    @Qualifier("alertConfigRouter")
+    public Map<Route, LambdaFunction> getAlertConfigRouter(
         GetAlertConfigurationLambda getAlertConfigurationLambda,
         PostConfigureAlertLambda postConfigureAlertLambda
     ) {
         Map<Route, LambdaFunction> routerConfig = new HashMap<>();
-        routerConfig.put(new Route(HttpMethod.POST, "/alert/configuration"), postConfigureAlertLambda);
-        routerConfig.put(new Route(HttpMethod.GET, "/alert/configuration"), getAlertConfigurationLambda);
-        routerConfig.put(new Route(HttpMethod.POST, "/alert"), postAlertLambda);
-        routerConfig.put(new Route(HttpMethod.GET, "/alert"), getAlertLambda);
-
+        routerConfig.put(new Route(HttpMethod.POST, "/alert/configuration"),
+            postConfigureAlertLambda);
+        routerConfig.put(new Route(HttpMethod.GET, "/alert/configuration"),
+            getAlertConfigurationLambda);
         return routerConfig;
     }
-
 
 }

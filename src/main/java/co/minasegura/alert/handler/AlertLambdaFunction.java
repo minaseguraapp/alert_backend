@@ -7,6 +7,7 @@ import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent;
 import java.util.Map;
 import java.util.function.Function;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import software.amazon.awssdk.http.HttpStatusCode;
 
@@ -16,7 +17,7 @@ public class AlertLambdaFunction implements
 
     private final Map<Route, LambdaFunction> router;
 
-    public AlertLambdaFunction(Map<Route, LambdaFunction> router) {
+    public AlertLambdaFunction(@Qualifier("alertRouter") Map<Route, LambdaFunction> router) {
         this.router = router;
     }
 
