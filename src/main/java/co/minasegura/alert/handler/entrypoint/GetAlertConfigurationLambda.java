@@ -38,7 +38,7 @@ public class GetAlertConfigurationLambda implements LambdaFunction {
                     .withStatusCode(HttpStatusCode.BAD_REQUEST);
         }
 
-        EnumMap<AlertConfigurationFilter, String> searchCriteria = entrypointUtil.getAlertFilter(
+        EnumMap<AlertConfigurationFilter, String> searchCriteria = entrypointUtil.getAlertConfigFilter(
                 apiGatewayProxyRequestEvent.getQueryStringParameters());
 
         if (!entrypointUtil.hasRequestMinimumCriteria(searchCriteria)) {

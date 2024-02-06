@@ -46,6 +46,8 @@ Resources:
                   - dynamodb:DeleteItem
                 Resource:
                   - !GetAtt AlertConfigurationTable.Arn
+                  - !GetAtt AlertTable.Arn
+                  - !Sub "${AlertTable.Arn}/index/MineTypeIndex"
         - PolicyName: CloudWatchLogsAccess
           PolicyDocument:
             Version: '2012-10-17'
@@ -86,12 +88,6 @@ Resources:
         Variables:
           SPRING_CLOUD_FUNCTION_DEFINITION: alertLambdaFunction
       Events:
-        PostRequest:
-          Type: Api
-          Properties:
-            RestApiId: !Ref AlertApi
-            Path: /alert
-            Method: post
         GetRequest:
           Type: Api
           Properties:

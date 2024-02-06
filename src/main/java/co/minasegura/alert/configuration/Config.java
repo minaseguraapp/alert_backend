@@ -3,7 +3,6 @@ package co.minasegura.alert.configuration;
 
 import co.minasegura.alert.handler.entrypoint.GetAlertConfigurationLambda;
 import co.minasegura.alert.handler.entrypoint.GetAlertLambda;
-import co.minasegura.alert.handler.entrypoint.PostAlertLambda;
 import co.minasegura.alert.handler.entrypoint.PostConfigureAlertLambda;
 import co.minasegura.alert.handler.route.LambdaFunction;
 import co.minasegura.alert.handler.route.Route;
@@ -38,11 +37,8 @@ public class Config {
     @Bean
     @Qualifier("alertRouter")
     public Map<Route, LambdaFunction> getAlertRouter(
-        GetAlertLambda getAlertLambda,
-        PostAlertLambda postAlertLambda
-        ) {
+        GetAlertLambda getAlertLambda) {
         Map<Route, LambdaFunction> routerConfig = new HashMap<>();
-        routerConfig.put(new Route(HttpMethod.POST, "/alert"), postAlertLambda);
         routerConfig.put(new Route(HttpMethod.GET, "/alert"), getAlertLambda);
         return routerConfig;
     }

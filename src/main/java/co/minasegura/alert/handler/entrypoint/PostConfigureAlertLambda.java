@@ -36,7 +36,7 @@ public class PostConfigureAlertLambda implements LambdaFunction {
         final AlertConfiguration alertToRegister =
                 commonsUtil.toObject(apiGatewayProxyRequestEvent.getBody(), AlertConfiguration.class);
 
-        if(!entrypointUtil.isMeasurementValid(alertToRegister)){
+        if(!entrypointUtil.isAlertConfigurationValid(alertToRegister)){
             return new APIGatewayProxyResponseEvent()
                     .withStatusCode(HttpStatusCode.BAD_REQUEST);
         }
