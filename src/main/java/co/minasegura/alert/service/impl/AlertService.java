@@ -64,6 +64,7 @@ public class AlertService implements IAlertService {
 
         final var configurationCriteria = new EnumMap<AlertConfigurationFilter, String>(
             AlertConfigurationFilter.class);
+
         configurationCriteria.put(AlertConfigurationFilter.MINE, measurement.zone().mine().id());
         configurationCriteria.put(AlertConfigurationFilter.MEASUREMENT_TYPE,
             measurementType.name());
