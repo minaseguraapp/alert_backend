@@ -2,7 +2,7 @@ package co.minasegura.alert.service;
 
 import co.minasegura.alert.dto.AlertConfigurationFilter;
 import co.minasegura.alert.dto.GetAlertConfigurationResponse;
-import co.minasegura.alert.model.AlertConfiguration;
+import co.minasegura.alert.model.alert.AlertConfiguration;
 
 import java.util.EnumMap;
 

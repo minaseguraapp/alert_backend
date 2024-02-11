@@ -1,6 +1,6 @@
 package co.minasegura.alert.dto;
 
-import co.minasegura.alert.model.AlertConfiguration;
+import co.minasegura.alert.model.alert.AlertConfiguration;
 
 import java.util.List;
 

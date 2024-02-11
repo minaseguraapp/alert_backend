@@ -3,9 +3,11 @@ package co.minasegura.alert.mapper.impl;
 import co.minasegura.alert.entity.AlertEntity;
 import co.minasegura.alert.entity.AlertInfoEntity;
 import co.minasegura.alert.mapper.IAlertMapper;
-import co.minasegura.alert.model.Alert;
-import co.minasegura.alert.model.AlertInfo;
+import co.minasegura.alert.model.alert.Alert;
+import co.minasegura.alert.model.alert.AlertInfo;
+import co.minasegura.alert.model.measurement.Measurement;
 import co.minasegura.alert.util.DynamoDBUtil;
+import java.util.List;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -49,5 +51,10 @@ public class AlertMapper implements IAlertMapper {
                     alertInfo.valueExpected(),
                     alertInfo.valueFound())).toList()
         );
+    }
+
+    @Override
+    public Alert measurementToAlert(Measurement measurement, List<AlertInfo> alertInfo) {
+        return null;
     }
 }

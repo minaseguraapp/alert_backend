@@ -1,4 +1,4 @@
-package co.minasegura.alert.model;
+package co.minasegura.alert.model.alert;
 
 public record AlertInfo(
     String thresholdName,

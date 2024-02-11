@@ -1,7 +1,7 @@
 package co.minasegura.alert.handler.entrypoint;
 
 import co.minasegura.alert.handler.route.LambdaFunction;
-import co.minasegura.alert.model.AlertConfiguration;
+import co.minasegura.alert.model.alert.AlertConfiguration;
 import co.minasegura.alert.service.IAlertConfigurationService;
 import co.minasegura.alert.util.CommonsUtil;
 import co.minasegura.alert.util.EntrypointUtil;

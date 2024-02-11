@@ -2,8 +2,8 @@ package co.minasegura.alert.util;
 
 import co.minasegura.alert.dto.AlertConfigurationFilter;
 import co.minasegura.alert.dto.AlertQueryFilter;
-import co.minasegura.alert.model.Alert;
-import co.minasegura.alert.model.AlertConfiguration;
+import co.minasegura.alert.model.alert.Alert;
+import co.minasegura.alert.model.alert.AlertConfiguration;
 import co.minasegura.alert.properties.AlertConfigurationProperties;
 import co.minasegura.alert.properties.AlertProperties;
 import jakarta.validation.Validator;

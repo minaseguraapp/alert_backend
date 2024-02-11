@@ -1,4 +1,4 @@
-package co.minasegura.alert.model;
+package co.minasegura.alert.model.alert;
 
 import java.util.List;
 import java.util.Map;

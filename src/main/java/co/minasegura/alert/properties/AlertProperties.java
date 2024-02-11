@@ -12,6 +12,7 @@ public class AlertProperties {
     private Set<AlertQueryFilter> requiredFilters;
     private String partitionKeyFormat;
     private String sortKeyFormat;
+    private String eventName;
 
 
     public Set<AlertQueryFilter> getRequiredFilters() {
@@ -36,5 +37,13 @@ public class AlertProperties {
 
     public void setSortKeyFormat(String sortKeyFormat) {
         this.sortKeyFormat = sortKeyFormat;
+    }
+
+    public String getEventName() {
+        return eventName;
+    }
+
+    public void setEventName(String eventName) {
+        this.eventName = eventName;
     }
 }

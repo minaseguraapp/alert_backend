@@ -4,7 +4,7 @@ import co.minasegura.alert.dto.AlertConfigurationFilter;
 import co.minasegura.alert.dto.GetAlertConfigurationResponse;
 import co.minasegura.alert.entity.AlertConfigurationEntity;
 import co.minasegura.alert.mapper.impl.AlertConfigurationMapper;
-import co.minasegura.alert.model.AlertConfiguration;
+import co.minasegura.alert.model.alert.AlertConfiguration;
 import co.minasegura.alert.repository.IAlertConfigurationRepository;
 import co.minasegura.alert.service.IAlertConfigurationService;
 import co.minasegura.alert.util.CommonsUtil;

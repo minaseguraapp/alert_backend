@@ -2,8 +2,8 @@ package co.minasegura.alert.mapper.impl;
 
 import co.minasegura.alert.entity.AlertConfigurationEntity;
 import co.minasegura.alert.mapper.IAlertConfigurationMapper;
-import co.minasegura.alert.model.AlertConfiguration;
-import co.minasegura.alert.model.MeasurementType;
+import co.minasegura.alert.model.alert.AlertConfiguration;
+import co.minasegura.alert.model.commons.MeasurementType;
 import org.springframework.stereotype.Component;
 
 @Component

@@ -1,4 +1,4 @@
-package co.minasegura.alert.model;
+package co.minasegura.alert.model.commons;
 
 public enum MeasurementType {
     METHANE, COAL_DUST

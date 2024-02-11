@@ -13,6 +13,11 @@ Globals:
     Timeout: 30
     MemorySize: 1024
 
+Parameters:
+  MeasurementQueueArn:
+    Type: String
+    Description: "ARN of the MeasurementQueue"
+
 Resources:
   AlertApi:
     Type: AWS::Serverless::Api
@@ -58,6 +63,16 @@ Resources:
                   - logs:CreateLogStream
                   - logs:PutLogEvents
                 Resource: arn:aws:logs:*:*:*
+        - PolicyName: SQSAccess
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - sqs:ReceiveMessage
+                  - sqs:DeleteMessage
+                  - sqs:GetQueueAttributes
+                Resource: !Ref MeasurementQueueArn
 
   AlertConfigurationFunction:
     Type: AWS::Serverless::Function
@@ -94,6 +109,20 @@ Resources:
             RestApiId: !Ref AlertApi
             Path: /alert
             Method: get
+
+  ProcessAlertFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Role: !GetAtt LambdaExecutionRole.Arn
+      Environment:
+        Variables:
+          SPRING_CLOUD_FUNCTION_DEFINITION: processAlertLambdaFunction
+      Events:
+        SqsEvent:
+          Type: SQS
+          Properties:
+            Queue: !Ref MeasurementQueueArn
+            BatchSize: 10
 
   AlertConfigurationTable:
     Type: AWS::DynamoDB::Table

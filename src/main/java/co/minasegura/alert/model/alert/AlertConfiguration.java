@@ -1,5 +1,6 @@
-package co.minasegura.alert.model;
+package co.minasegura.alert.model.alert;
 
+import co.minasegura.alert.model.commons.MeasurementType;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 
