@@ -48,7 +48,7 @@ public class ProcessAlertLambdaFunction implements Function<Message<SQSEvent>, V
                 continue;
             }
 
-            if (alertProperties.getEventName().equals(receivedMeasurementEvent.get().eventType())) {
+            if (!alertProperties.getEventName().equals(receivedMeasurementEvent.get().eventType())) {
                 LOGGER.info("The event type is not valid [{}]",
                     receivedMeasurementEvent.get().eventType());
                 continue;

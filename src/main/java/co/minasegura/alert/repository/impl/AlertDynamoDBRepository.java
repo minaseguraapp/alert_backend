@@ -102,7 +102,7 @@ public class AlertDynamoDBRepository implements IAlertRepository {
     @Override
     public boolean createAlert(AlertEntity alertEntity) {
         LOGGER.info("POST Alert Repository");
-        DynamoDbTable<AlertEntity> alertTable = enhancedClient.table("AlertEntity",
+        DynamoDbTable<AlertEntity> alertTable = enhancedClient.table("AlertTable",
             TableSchema.fromBean(AlertEntity.class));
 
         alertTable.putItem(alertEntity);

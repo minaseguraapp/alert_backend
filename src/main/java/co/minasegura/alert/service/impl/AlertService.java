@@ -91,8 +91,14 @@ public class AlertService implements IAlertService {
             return null;
         }
 
+        LOGGER.info("General Configuration found : [{}]",
+            commonsUtil.toJson(configuration.get()));
+
         final List<AlertInfo> alertInfo = findingService.getMeasurementThresholdFindings(
             measurementType, measurement.measurementInfo(), configuration.get().thresholdInfo());
+
+        LOGGER.info("Alerts created : [{}]",
+            commonsUtil.toJson(alertInfo));
 
         Optional<Alert> alertToReturn= Optional.ofNullable(alertInfo)
             .filter(alertInfos -> !alertInfos.isEmpty())

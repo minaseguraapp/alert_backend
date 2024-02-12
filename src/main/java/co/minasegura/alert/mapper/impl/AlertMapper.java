@@ -7,6 +7,7 @@ import co.minasegura.alert.model.alert.Alert;
 import co.minasegura.alert.model.alert.AlertInfo;
 import co.minasegura.alert.model.measurement.Measurement;
 import co.minasegura.alert.util.DynamoDBUtil;
+import java.sql.Timestamp;
 import java.util.List;
 import org.springframework.stereotype.Component;
 
@@ -55,6 +56,14 @@ public class AlertMapper implements IAlertMapper {
 
     @Override
     public Alert measurementToAlert(Measurement measurement, List<AlertInfo> alertInfo) {
-        return null;
+        return new Alert(
+            measurement.zone().mine().id(),
+            measurement.zone().id(),
+            measurement.measurementType().name(),
+            measurement.timestamp(),
+            new Timestamp(System.currentTimeMillis()).getTime(),
+            measurement.measurementInfo(),
+            alertInfo
+        );
     }
 }
